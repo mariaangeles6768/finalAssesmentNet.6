@@ -8,6 +8,12 @@ import Tutorial from "./components/car.component";
 import TutorialsList from "./components/car-list.component";
 import Claims from "./components/claim.component";
 
+componentDidMount() {
+  fetch('http://localhost:7114')
+  .then(result=>result.json())
+  .then(items=>this.setState({items}))
+}
+
 class App extends Component {
   render() {
     return (
