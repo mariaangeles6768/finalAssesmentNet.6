@@ -15,23 +15,6 @@ namespace sna.Controllers
     {
         MySqlConnection connection = new MySqlConnection("server=localhost;user=jjjjjj;password=123;database=snaDatabase");
 
-    private static readonly string[] Names = new[]
-            {
-            "JJJJJ", "ELyum", "Robert", "Emma", "Evelyn", "Ctyu", "Spviufo", "Aod"
-        };
-
-        private static readonly string[] Licenses = new[]
-            {
-            "AS47ET", "ADSC12", "HB67ED", "98DCGV", "67DC89", "DC32US", "DC67QA", "IK71NC"
-        };
-
-        private readonly ILogger<Owner> _logger;
-
-        public OwnerController(ILogger<Owner> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet(Name = "GetOwners")]
         public LinkedList<Owner> GetOwners()
         {

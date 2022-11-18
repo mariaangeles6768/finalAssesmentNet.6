@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pcMlvy+dY6qXXfczDAq++YqPW2GJQrWM6DF61qJx/htXEJOP+o9obovMNgAdu0oXroAE3x8niMh8Txv8hVZClQ==",
+  "dgSpecHash": "OzniEMqoNA0KYaO9UyIF5brJMClt/Re+b/RDD4DPjcn2JyjL9KhLV8MahnK3wA3keyERKu5ktjcjWYZwCPpxxA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Joao.CostaM\\sna\\sna\\sna.csproj",
+  "projectFilePath": "C:\\Users\\Joao.CostaM\\finalAssesmentNet.6\\sna\\sna\\sna.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joao.CostaM\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\Joao.CostaM\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",

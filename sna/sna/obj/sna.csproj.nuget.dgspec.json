@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Joao.CostaM\\sna\\sna\\sna.csproj": {}
+    "C:\\Users\\Joao.CostaM\\finalAssesmentNet.6\\sna\\sna\\sna.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Joao.CostaM\\sna\\sna\\sna.csproj": {
+    "C:\\Users\\Joao.CostaM\\finalAssesmentNet.6\\sna\\sna\\sna.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Joao.CostaM\\sna\\sna\\sna.csproj",
+        "projectUniqueName": "C:\\Users\\Joao.CostaM\\finalAssesmentNet.6\\sna\\sna\\sna.csproj",
         "projectName": "sna",
-        "projectPath": "C:\\Users\\Joao.CostaM\\sna\\sna\\sna.csproj",
+        "projectPath": "C:\\Users\\Joao.CostaM\\finalAssesmentNet.6\\sna\\sna\\sna.csproj",
         "packagesPath": "C:\\Users\\Joao.CostaM\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Joao.CostaM\\sna\\sna\\obj\\",
+        "outputPath": "C:\\Users\\Joao.CostaM\\finalAssesmentNet.6\\sna\\sna\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Joao.CostaM\\AppData\\Roaming\\NuGet\\NuGet.Config",
