@@ -1,42 +1,43 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import TutorialDataService from "../services/car.service";
 import { Link } from "react-router-dom";
+import Car from "./car.component";
 
 export default class TutorialsList extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-    this.retrieveTutorials = this.retrieveTutorials.bind(this);
+    this.onChangeBrand = this.onChangeBrand.bind(this);
+    this.retrieveCars = this.retrieveCars.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
-    this.removeAllTutorials = this.removeAllTutorials.bind(this);
-    this.searchTitle = this.searchTitle.bind(this);
+    this.setActiveCar = this.setActiveCar.bind(this);
+    this.removeAllCars = this.removeAllCars.bind(this);
+    this.searchBrand = this.searchBrand.bind(this);
 
     this.state = {
-      tutorials: [],
-      currentTutorial: null,
+      vehicles: [],
+      currentCar: null,
       currentIndex: -1,
-      searchTitle: ""
+      searchBrand: ""
     };
   }
 
   componentDidMount() {
-    this.retrieveTutorials();
+    this.retrieveCars();
   }
 
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
+ onChangeBrand(e) {
+    const searchBrand = e.target.value;
 
     this.setState({
-      searchTitle: searchTitle
+      searchBrand: searchBrand
     });
   }
 
-  retrieveTutorials() {
+retrieveCars() {
     TutorialDataService.getAll()
       .then(response => {
         this.setState({
-          tutorials: response.data
+          Car: response.data
         });
         console.log(response.data);
       })
@@ -46,21 +47,21 @@ export default class TutorialsList extends Component {
   }
 
   refreshList() {
-    this.retrieveTutorials();
+    this.retrieveCars();
     this.setState({
-      currentTutorial: null,
+      currentCar: null,
       currentIndex: -1
     });
   }
 
-  setActiveTutorial(tutorial, index) {
+  setActiveCar(tutorial, index) {
     this.setState({
-      currentTutorial: tutorial,
+      currentCar: tutorial,
       currentIndex: index
     });
   }
 
-  removeAllTutorials() {
+  removeAllCars() {
     TutorialDataService.deleteAll()
       .then(response => {
         console.log(response.data);
@@ -71,16 +72,16 @@ export default class TutorialsList extends Component {
       });
   }
 
-  searchTitle() {
+  searchBrand() {
     this.setState({
-      currentTutorial: null,
+      currentCar: null,
       currentIndex: -1
     });
 
-    TutorialDataService.findByTitle(this.state.searchTitle)
+    TutorialDataService.findByTitle(this.state.searchBrand)
       .then(response => {
         this.setState({
-          tutorials: response.data
+          Car: response.data
         });
         console.log(response.data);
       })
@@ -90,7 +91,7 @@ export default class TutorialsList extends Component {
   }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
+    const { searchBrand, Car, currentCar, currentIndex } = this.state;
 
     return (
       <div className="list row">
@@ -100,14 +101,14 @@ export default class TutorialsList extends Component {
               type="text"
               className="form-control"
               placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
+              value={searchBrand}
+              onChange={this.onChangeBrand}
             />
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchTitle}
+                onClick={this.searchBrand}
               >
                 Search
               </button>
@@ -115,17 +116,17 @@ export default class TutorialsList extends Component {
           </div>
         </div>
         <div className="col-md-6">
-          <h4>Tutorials List</h4>
+          <h4> Car´s List</h4>
 
           <ul className="list-group">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
+            {Car &&
+              Car.map((tutorial, index) => (
                 <li
                   className={
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveTutorial(tutorial, index)}
+                  onClick={() => this.setActiveCar(tutorial, index)}
                   key={index}
                 >
                   {tutorial.title}
@@ -135,36 +136,36 @@ export default class TutorialsList extends Component {
 
           <button
             className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllTutorials}
+            onClick={this.removeAllCars}
           >
             Remove All
           </button>
         </div>
         <div className="col-md-6">
-          {currentTutorial ? (
+          {currentCar ? (
             <div>
-              <h4>Tutorial</h4>
+              <h4>Vehicles</h4>
               <div>
                 <label>
-                  <strong>Title:</strong>
+                  <strong>Brand:</strong>
                 </label>{" "}
-                {currentTutorial.title}
+                {currentCar.Brand}
               </div>
               <div>
                 <label>
-                  <strong>Description:</strong>
+                  <strong>Vin:</strong>
                 </label>{" "}
-                {currentTutorial.description}
+                {currentCar.Vin}
               </div>
               <div>
                 <label>
                   <strong>Status:</strong>
                 </label>{" "}
-                {currentTutorial.published ? "Published" : "Pending"}
+                {currentCar.published ? "Published" : "Pending"}
               </div>
 
               <Link
-                to={"/tutorials/" + currentTutorial.id}
+                to={"/Car/" + currentCar.id}
                 className="badge badge-warning"
               >
                 Edit
@@ -173,7 +174,7 @@ export default class TutorialsList extends Component {
           ) : (
             <div>
               <br />
-              <p>Please click on a Tutorial...</p>
+              <p>Please click on a Vehicle...</p>
             </div>
           )}
         </div>

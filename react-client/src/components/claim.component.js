@@ -1,60 +1,60 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import ClaimDataService from "../services/car.service";
 
-export default class Tutorial extends Component {
+export default class Claims extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.getTutorial = this.getTutorial.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
-    this.updateTutorial = this.updateTutorial.bind(this);
-    this.deleteTutorial = this.deleteTutorial.bind(this);
+    this.onChangeStatus = this.onChangeStatus.bind(this);
+    this.onChangeDate = this.onChangeDate.bind(this);
+    this.getClaim = this.getClaim.bind(this);
+    this.updateClaim = this.updateClaim.bind(this);
+    this.deleteClaim = this.deleteClaim.bind(this);
 
     this.state = {
-      currentTutorial: {
+      currentClaim: {
         id: null,
-        title: "",
         description: "",
-        published: false
+        status: "",
+        date: Date.now()
       },
       message: ""
     };
   }
 
   componentDidMount() {
-    this.getTutorial(this.props.match.params.id);
+    this.getClaim(this.props.match.params.id);
   }
 
-  onChangeTitle(e) {
-    const title = e.target.value;
+  onChangeDescription(e) {
+    const Description = e.target.value;
 
     this.setState(function(prevState) {
       return {
-        currentTutorial: {
-          ...prevState.currentTutorial,
-          title: title
+        currentClaim: {
+          ...prevState.currentClaim,
+          Description: Description
         }
       };
     });
   }
 
-  onChangeDescription(e) {
-    const description = e.target.value;
+  onChangeStatus(e) {
+    const Status = e.target.value;
     
     this.setState(prevState => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
-        description: description
+      currentClaim: {
+        ...prevState.currentClaim,
+        Status: Status
       }
     }));
   }
 
-  getTutorial(id) {
-    TutorialDataService.get(id)
+  getClaim(id) {
+    ClaimDataService.get(id)
       .then(response => {
         this.setState({
-          currentTutorial: response.data
+          currentClaim: response.data
         });
         console.log(response.data);
       })
@@ -65,17 +65,18 @@ export default class Tutorial extends Component {
 
   updatePublished(status) {
     var data = {
-      id: this.state.currentTutorial.id,
-      title: this.state.currentTutorial.title,
-      description: this.state.currentTutorial.description,
+      id: this.state.currentClaim.id,
+      description: this.state.currentClaim.description,
+      status: this.state.currentClaim.status,
+      date: this.state.currentClaim.date,
       published: status
     };
 
-    TutorialDataService.update(this.state.currentTutorial.id, data)
+    ClaimDataService.update(this.state.currentTutorial.id, data)
       .then(response => {
         this.setState(prevState => ({
-          currentTutorial: {
-            ...prevState.currentTutorial,
+          currentClaim: {
+            ...prevState.currentClaim,
             published: status
           }
         }));
@@ -86,10 +87,10 @@ export default class Tutorial extends Component {
       });
   }
 
-  updateTutorial() {
-    TutorialDataService.update(
-      this.state.currentTutorial.id,
-      this.state.currentTutorial
+  updateClaim() {
+    ClaimDataService.update(
+      this.state.currentClaim.id,
+      this.state.currentClaim
     )
       .then(response => {
         console.log(response.data);
@@ -102,11 +103,11 @@ export default class Tutorial extends Component {
       });
   }
 
-  deleteTutorial() {    
-    TutorialDataService.delete(this.state.currentTutorial.id)
+  deleteClaim() {    
+    ClaimDataService.delete(this.state.currentClaim.id)
       .then(response => {
         console.log(response.data);
-        this.props.history.push('/tutorials')
+        this.props.history.push('/claim')
       })
       .catch(e => {
         console.log(e);
@@ -114,32 +115,32 @@ export default class Tutorial extends Component {
   }
 
   render() {
-    const { currentTutorial } = this.state;
+    const { currentClaim } = this.state;
 
     return (
       <div>
-        {currentTutorial ? (
+        {currentClaim ? (
           <div className="edit-form">
-            <h4>Tutorial</h4>
+            <h4>Claim</h4>
             <form>
               <div className="form-group">
-                <label htmlFor="title">Title</label>
+                <label htmlFor="title">Description</label>
                 <input
                   type="text"
                   className="form-control"
                   id="title"
-                  value={currentTutorial.title}
-                  onChange={this.onChangeTitle}
+                  value={currentClaim.description}
+                  onChange={this.onChangeDescription}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="description">Description</label>
+                <label htmlFor="status">Status</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="description"
-                  value={currentTutorial.description}
-                  onChange={this.onChangeDescription}
+                  id="status"
+                  value={currentClaim.status}
+                  onChange={this.onChangeStatus}
                 />
               </div>
 
@@ -147,11 +148,11 @@ export default class Tutorial extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>
-                {currentTutorial.published ? "Published" : "Pending"}
+                {currentClaim.published ? "Published" : "Pending"}
               </div>
             </form>
 
-            {currentTutorial.published ? (
+            {currentClaim.published ? (
               <button
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(false)}
@@ -169,7 +170,7 @@ export default class Tutorial extends Component {
 
             <button
               className="badge badge-danger mr-2"
-              onClick={this.deleteTutorial}
+              onClick={this.deleteClaim}
             >
               Delete
             </button>
@@ -177,7 +178,7 @@ export default class Tutorial extends Component {
             <button
               type="submit"
               className="badge badge-success"
-              onClick={this.updateTutorial}
+              onClick={this.updateClaim}
             >
               Update
             </button>
@@ -186,7 +187,7 @@ export default class Tutorial extends Component {
         ) : (
           <div>
             <br />
-            <p>Please click on a Tutorial...</p>
+            <p>Please click on a Claim...</p>
           </div>
         )}
       </div>
